@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    Matrix mat1 = Matrix(2,4,1.1);
+    Matrix mat1 = Matrix(6,4);
     mat1.printMatrix();
     return 0;
 }

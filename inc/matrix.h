@@ -21,7 +21,7 @@ public:
 
     // Constructor
     Matrix();
-    Matrix(int row, int col, float val);
+    Matrix(int r, int c);
     Matrix(const Matrix &rhs);
 
     // Deconstructor
@@ -39,10 +39,11 @@ Matrix::Matrix()
     row = 0;
     column =0;
     size = 0;
-    value = NULL;   
+    value = NULL;  
+    std::cout << "default constructor used" << std::endl; 
 }
 
-Matrix::Matrix(int r, int c, float val) : row(r), column(c)
+Matrix::Matrix(int r, int c) : row(r), column(c)
 {
     if (row <= 0 || column <= 0)
     {
@@ -53,12 +54,7 @@ Matrix::Matrix(int r, int c, float val) : row(r), column(c)
     {
         size = row * column;
         value = new float[size];
-
-        for(size_t i = 0; i < size; i++)
-        {
-         value[i] = val;
-        }
-
+        memset(value, 0.0, size * sizeof(float));
         std::cout << "constructor used" << std::endl;
     }
 
@@ -89,7 +85,7 @@ void Matrix:: printMatrix()
         {
             for (j = 0; j < column; j++)
             {
-                std::cout << std::setprecision(5) << this->value[i * (this->column) + j]<<" " ;
+                std::cout << std::setprecision(10) << this->value[i * (this->column) + j]<<" " ;
             }
 
         std::cout << std::endl;
