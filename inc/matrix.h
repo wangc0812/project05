@@ -45,7 +45,7 @@ Matrix::Matrix()
 
 Matrix::Matrix(int r, int c) : row(r), column(c)
 {
-    if (row <= 0 || column <= 0)
+    if (r <= 0 || c <= 0)
     {
         ERROR_INPUT_INPUTPARA;
         std::cout << "This error happened in constructor" << std::endl;
