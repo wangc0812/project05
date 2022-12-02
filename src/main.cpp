@@ -6,7 +6,10 @@ using namespace std;
 
 int main()
 {
-    Matrix mat1 = Matrix(-6,4);
-    mat1.printMatrix();
+    Matrix<float> fmat(3,4);
+    fmat.printMatrix();
+    fmat.setElement(1,2,1.6666f);
+    fmat.printMatrix();
+    cout << fmat.getElement(1,2) << endl;
     return 0;
 }
