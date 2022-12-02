@@ -7,10 +7,9 @@
 #include <iomanip>
 
 
-
 // Class Matrix define
-
-template <typename T> class Matrix
+template <typename T>
+class Matrix
 {
 private:
 
@@ -60,7 +59,7 @@ public:
             
     }
 
-    // Print matrix
+    // Print Matrix or Elems
     void printMatrix()
     {
         if(this != NULL)
@@ -88,6 +87,16 @@ public:
 
     }
 
+     T getElement(size_t r, size_t c)
+    {
+        if ( r >= this->_row || c >= this->_column )
+        {
+            std::cerr << "getElement(): Indices are out of range" << std::endl;
+            return 0;
+        }
+        return _elem[ this->_column * r + c];
+    }
+
     bool setElement(size_t r, size_t c, T value)
     {
         if ( r >= this->_row || c >= this->_column )
@@ -100,18 +109,8 @@ public:
         return true;
     }
 
-    T getElement(size_t r, size_t c)
-    {
-        if ( r >= this->_row || c >= this->_column )
-        {
-            std::cerr << "getElement(): Indices are out of range" << std::endl;
-            return 0;
-        }
-        return _elem[ this->_column * r + c];
-    }
+
 
 };
-
-
 
 #endif
