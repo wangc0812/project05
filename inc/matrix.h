@@ -10,7 +10,7 @@
 // Class Matrix define
 template <typename T>
 class Matrix
-{
+{    
 private:
 
     size_t _row, _column, _size;
@@ -60,7 +60,7 @@ public:
     }
 
     // Print Matrix or Elems
-    void printMatrix()
+    void printMatrix() const
     {
         if(this != NULL)
         {
@@ -71,7 +71,7 @@ public:
             {
                 for (j = 0; j < _column; j++)
                 {
-                    std::cout << std::setprecision(10) << this->_elem[i * (this->_column) + j]<<" " ;
+                    std::cout << this->_elem[i * (this->_column) + j]<<" " ;
                 }
 
             std::cout << std::endl;
@@ -87,7 +87,7 @@ public:
 
     }
 
-     T getElement(size_t r, size_t c)
+     T getElement(size_t r, size_t c) const
     {
         if ( r >= this->_row || c >= this->_column )
         {
@@ -164,7 +164,27 @@ public:
 
     }
 
+    Matrix operator*(const T scalar) const
+    {
+        Matrix<T> DOT_PRODUCT(this -> _column, this -> _row);
+
+        for(size_t i = 0; i < this ->_size; i++)
+        {
+            DOT_PRODUCT._elem[i] = this -> _elem[i] * scalar;
+        }
+
+        return DOT_PRODUCT;
+    }
+    
+    // friend function parameter list has order!
+    friend Matrix<T> operator*(const T scalar, const Matrix<T> & Mat)
+    {
+        return Mat * scalar;
+    }
 
 };
+
+
+
 
 #endif
