@@ -109,6 +109,60 @@ public:
         return true;
     }
 
+    // Operator overloading
+    Matrix operator+(const Matrix<T> & B) const
+    {
+        Matrix<T> MAT_SUM;
+        if (this ->_column != B._column || this ->_row != B._row )
+        {
+            ERROR_INPUT_INPUTPARA;
+            std::cout << "This error happened operator+" << std::endl;
+            return MAT_SUM;
+        }
+        else
+        {
+            MAT_SUM._column = this -> _column;
+            MAT_SUM._row = this -> _row;
+            MAT_SUM._size = this -> _size;
+            MAT_SUM._elem = new T[_size];
+            memset(MAT_SUM._elem, 0, MAT_SUM._size * sizeof(T));
+            
+
+            for(size_t i = 0; i < this ->_size; i++)
+            {
+                MAT_SUM._elem[i] = this -> _elem[i] + B._elem[i];
+            }
+            return MAT_SUM;
+        }
+
+    }
+
+    Matrix operator-(const Matrix<T> & B) const
+    {
+        Matrix<T> MAT_SUB;
+        if (this ->_column != B._column || this ->_row != B._row )
+        {
+            ERROR_INPUT_INPUTPARA;
+            std::cout << "This error happened operator-" << std::endl;
+            return MAT_SUB;
+        }
+        else
+        {
+            MAT_SUB._column = this -> _column;
+            MAT_SUB._row = this -> _row;
+            MAT_SUB._size = this -> _size;
+            MAT_SUB._elem = new T[_size];
+            memset(MAT_SUB._elem, 0, MAT_SUB._size * sizeof(T));
+            
+
+            for(size_t i = 0; i < this ->_size; i++)
+            {
+                MAT_SUB._elem[i] = this -> _elem[i] - B._elem[i];
+            }
+            return MAT_SUB;
+        }
+
+    }
 
 
 };
