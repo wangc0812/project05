@@ -44,6 +44,7 @@ public:
         }
 
     }
+    
     Matrix(const Matrix &rhs);
 
     // Deconstructor
