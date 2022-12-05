@@ -21,10 +21,7 @@ public:
     // Constructor
     Matrix()
     {
-        _row = 0;
-        _column =0;
-        _size = 0;
-        _elem = NULL;  
+        release();
         std::cout << "default constructor used" << std::endl; 
     }
 
@@ -50,12 +47,64 @@ public:
             
             memset(_elem, 0, _size * sizeof(T));
             std::cout << "constructor used" << std::endl;
-            
+
         }
 
     }
-    
+
+    Matrix(size_t r, size_t c, * data)
+
     Matrix(const Matrix &rhs);
+    
+    bool create(size_t size,  const T * data)
+    {
+        release();
+
+        if (size == 0)
+        {
+            std::cout << "ERROR: matrix size is zero" << std::endl;
+            return false;
+        }
+
+        if(data == NULL)
+        {
+            std::cout << "input data invalid" << std::endl;
+            return false;
+        }
+        
+        this -> _size = size;
+
+        if(this -> _size != 0)
+        {
+            this -> _elem = new T[this -> _size];
+        }
+
+        if (_elem == NULL)
+        {
+            std::cout << "failed to allocate memory for matrix data" << std::endl;
+            free( _elem);
+            return false;
+        }
+
+        memcpy(this -> _elem, data, this -> _size);
+
+        return true;
+    }
+
+    bool release()
+    {
+        this -> _row = 0;
+        this -> _column = 0;
+        this -> _size = 0;
+
+        if(this -> _elem != NULL)
+        {
+            delete [] this -> _elem;
+            this -> _elem = NULL;
+        }
+
+        return true;
+    }
 
     // Deconstructor
     ~Matrix()
