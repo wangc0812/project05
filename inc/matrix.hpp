@@ -14,7 +14,7 @@ class Matrix
 private:
 
     size_t _row, _column, _size;
-    T* _elem;
+    T * _elem;
     
 public:
 
@@ -28,19 +28,29 @@ public:
         std::cout << "default constructor used" << std::endl; 
     }
 
-    Matrix(int r, int c) : _row(r), _column(c)
+    Matrix(size_t r, size_t c) : _row(r), _column(c)
     {
-        if (r <= 0 || c <= 0 )
+        if (r == 0 || c == 0 )
         {
             ERROR_INPUT_INPUTPARA;
             std::cout << "This error happened in constructor" << std::endl;
+            return NULL;
         }
         else
         {
             _size = _row * _column;
             _elem = new T[_size];
+
+            if (_elem == NULL)
+            {
+                std::cout << "failed to allocate memory for matrix data" << std::endl;
+                free(_elem);
+                return NULL;
+            }
+            
             memset(_elem, 0, _size * sizeof(T));
             std::cout << "constructor used" << std::endl;
+            
         }
 
     }
