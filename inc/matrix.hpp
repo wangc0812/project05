@@ -298,13 +298,49 @@ public:
         return DOT_PRODUCT;
     }
     
+    
+
     // friend function parameter list has order!
     friend Matrix<T> operator*(const T scalar, const Matrix<T> & Mat)
     {
         return Mat * scalar;
     }
 
+    friend Matrix<T> matmul(const Matrix<T> & A, const Matrix<T> & B)
+    {
+        if (A._elem == NULL || B._elem == NULL)
+        {
+            std::cerr << "matrix data invalid" << std::endl;
+            std::cerr <<"this error happened in matmul"<< std::endl;
+            return A;
+        }
+
+        if (A._column != B._row)
+        {
+            ERROR_SIZE_MATCH;
+            std::cerr <<"this error happened in matmul"<< std::endl;
+            return A; 
+        }
+
+        size_t i, j, k;
+        Matrix<T> MAT_PRO(A._row, B._column);
+
+        for(i = 0; i < A._row; i++)
+        {
+            for(j = 0; j < B._column; j++)
+            {
+                for(k = 0; k < A._row; k++)
+                {
+                    MAT_PRO._elem[j + i * B._column] += A._elem[(i * A._column) + k] * B._elem[(k * B._column) + j];
+                }
+            }
+        }
+
+        return  MAT_PRO;
+    }
+
 };
+
 
 
 
