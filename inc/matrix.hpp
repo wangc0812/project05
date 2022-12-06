@@ -279,7 +279,7 @@ public:
 
     }
 
-    Matrix operator*(const T scalar) const
+    Matrix<T> operator*(const T scalar) const
     {
         if (this -> _elem == NULL)
         {   
