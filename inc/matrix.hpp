@@ -27,7 +27,7 @@ public:
         _elem = NULL;
         std::cout << "default constructor used" << std::endl; 
     }
-
+    
     // this constructor is to construct a full zero matrix with given size
     Matrix(size_t r, size_t c) : _row(r), _column(c)
     {
@@ -240,6 +240,23 @@ public:
         exit(-1);
         
     }
+
+    size_t getEleNum()
+    {
+        return this -> _size;
+    }
+
+    T * getValue()
+    {
+        if(this -> _elem == NULL)
+        {
+            std::cerr<< "Error : no matrix data"<<std::endl;
+            exit(-1);
+        }
+
+        return this -> _elem;
+    }
+
 
     // Operator overloading
     Matrix<T> operator+(const Matrix<T> & B) const

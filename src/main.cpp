@@ -22,6 +22,8 @@ int main()
     pro2.printMatrix();
     cout<<"row="<<pro1.shape(0)<<endl;
     cout<<"col="<<pro1.shape(1)<<endl;
+    float * data = pro1.getValue();
+    int len = pro1.getEleNum();
 
     // Matrix<float> sub = sum - fmat1;
     // sub.printMatrix();
