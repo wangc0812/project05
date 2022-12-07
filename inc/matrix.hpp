@@ -35,7 +35,7 @@ public:
         {
             ERROR_INPUT_INPUTPARA;
             std::cerr << "This error happened in constructor" << std::endl;
-            return;
+            exit(-1);
         }
         else
         {
@@ -47,7 +47,7 @@ public:
                 std::cerr << "Matrix(size_t r, size_t c) : failed to allocate memory for matrix data" << std::endl;
                 delete[] _elem;
                 _elem = NULL;
-                return;
+                exit(-1);
             }
             
             memset(_elem, 0, _size * sizeof(T));
@@ -63,13 +63,13 @@ public:
         {
             ERROR_INPUT_INPUTPARA;
             std::cerr << "This error happened in constructor" << std::endl;
-            return;
+            exit(-1);
         }
 
         if (data == NULL)
         {
             std::cerr << "input data invalid" << std::endl;
-            return;
+            exit(-1);
         }
         
         this -> _size = 0;
@@ -88,7 +88,7 @@ public:
         if(rhs._elem == NULL)
         {
          std::cerr << "Matrix(const Matrix<T> & rhs) : rhs data invalid" << std::endl; 
-         return;  
+         exit(-1);  
         }
         
         this -> _size = 0;
@@ -194,12 +194,12 @@ public:
         if ( r >= this->_row || c >= this->_column )
         {
             std::cerr << "getElement(): Indices are out of range" << std::endl;
-            return 1;
+            exit(-1);
         }
         if (this -> _elem == NULL)
         {
             std::cerr << "getElement(): input matrix data invalid" << std::endl;
-            return 1;
+            exit(-1);
         }
 
         return _elem[ this->_column * r + c];
@@ -230,14 +230,14 @@ public:
         {   
             std::cerr << "matrix data invalid" << std::endl;
             std::cerr << "This error happened operator+" << std::endl;
-            return *this;
+            exit(-1);
         }
         
         if (this ->_column != B._column || this ->_row != B._row )
         {
             ERROR_INPUT_INPUTPARA;
             std::cerr << "This error happened operator+" << std::endl;
-            return *this;
+            exit(-1);
         }
         
         Matrix<T> MAT_SUM(this -> _column, this -> _row);
@@ -258,14 +258,14 @@ public:
         {   
             std::cerr << "matrix data invalid" << std::endl;
             std::cerr << "This error happened operator-" << std::endl;
-            return *this;
+            exit(-1);
         }
 
         if (this ->_column != B._column || this ->_row != B._row )
         {
             ERROR_INPUT_INPUTPARA;
             std::cerr << "This error happened operator-" << std::endl;
-            return *this;
+            exit(-1);
         }
 
         Matrix<T> MAT_SUB(this -> _column, this -> _row);
@@ -285,7 +285,7 @@ public:
         {   
             std::cerr << "matrix data invalid" << std::endl;
             std::cerr << "This error happened in Matrix operator*(const T scalar)" << std::endl;
-            return *this;
+            exit(-1);
         }
         
         Matrix<T> DOT_PRODUCT(this -> _column, this -> _row);
@@ -298,6 +298,11 @@ public:
         return DOT_PRODUCT;
     }
     
+    Matrix<T> operator*(const Matrix<T> B) const
+    {   
+        Matrix<T> PRO = matmul(*this, B);
+        return PRO;
+    }
     
 
     // friend function parameter list has order!
@@ -312,14 +317,14 @@ public:
         {
             std::cerr << "matrix data invalid" << std::endl;
             std::cerr <<"this error happened in matmul"<< std::endl;
-            return A;
+            exit(-1);
         }
 
         if (A._column != B._row)
         {
             ERROR_SIZE_MATCH;
             std::cerr <<"this error happened in matmul"<< std::endl;
-            return A; 
+            exit(-1);
         }
 
         size_t i, j, k;
