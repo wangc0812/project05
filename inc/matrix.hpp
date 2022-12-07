@@ -76,7 +76,13 @@ public:
         this -> _elem = NULL;
 
         size_t size = this -> _column * this -> _row;
-        create(size, data);
+        bool flag = create(size, data);
+
+        if(flag == false)
+        {
+            std::cerr << "create() fail" << std::endl;
+            exit(-1);
+        }
 
         std::cout << "constructor with data used" << std::endl;
 
@@ -102,6 +108,7 @@ public:
 
     }
     
+    // This function is to assgin given data and _size to itself
     bool create(size_t size,  const T * data)
     {
         release();
@@ -138,12 +145,10 @@ public:
         return true;
     }
 
+    // This function is to release the matrix data memory
     bool release()
     {
-        this -> _row = 0;
-        this -> _column = 0;
-        this -> _size = 0;
-
+    
         if(this -> _elem != NULL)
         {
             delete [] this -> _elem;
@@ -156,6 +161,9 @@ public:
     // Deconstructor
     ~Matrix()
     {
+        this -> _row = 0;
+        this -> _column = 0;
+        this -> _size = 0;
         release();
         std::cout << "deconstructor used" << std::endl;
             
@@ -223,7 +231,7 @@ public:
         return true;
     }
 
-    size_t shape(int flag)
+    size_t shape(int flag) const
     {
         if (flag == 0)
         {
@@ -241,12 +249,12 @@ public:
         
     }
 
-    size_t getEleNum()
+    size_t getEleNum() const
     {
         return this -> _size;
     }
 
-    T * getValue()
+    T * getValue() const
     {
         if(this -> _elem == NULL)
         {
@@ -259,6 +267,35 @@ public:
 
 
     // Operator overloading
+    Matrix<T> operator=(const Matrix<T> & B)
+    {
+        if (B._elem == NULL || this -> _elem == NULL)
+        {   
+            std::cerr << "matrix data invalid" << std::endl;
+            std::cerr << "This error happened operator=" << std::endl;
+            exit(-1);
+        }
+
+        if (this -> _column != B._column || this -> _row != B._row)
+        {
+            ERROR_SIZE_MATCH;
+            std::cerr <<"this error happened in matmul"<< std::endl;
+            std::cerr << "This error happened operator=" << std::endl;
+            exit(-1);
+        }
+
+        bool flag = create(B._size, B._elem);
+
+        if(flag == false)
+        {
+            std::cerr << "create() fail" << std::endl;
+            std::cerr << "This error happened operator=" << std::endl;
+            exit(-1);
+        }
+
+        return * this;
+    }
+
     Matrix<T> operator+(const Matrix<T> & B) const
     {
         if (B._elem == NULL || this -> _elem == NULL)
@@ -379,6 +416,7 @@ public:
         return  MAT_PRO;
     }
 
+ 
 };
 
 
