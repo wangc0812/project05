@@ -6,10 +6,10 @@ using namespace std;
 
 int main()
 {
-    Matrix<float> fmat0(3,4);
+    Matrix<float> fmat0(4,4);
     fmat0.setElement(0,1,1.6666);
     // fmat0.printMatrix();
-    Matrix<float> fmat1(3,4);
+    Matrix<float> fmat1(4,4);
     fmat1.setElement(0,0,1.6666);
     // fmat1.printMatrix();
     Matrix<float> sum = fmat0 + fmat1;
@@ -20,6 +20,8 @@ int main()
     Matrix<float> pro2 = matmul(fmat1,fmat1);
     pro1.printMatrix();
     pro2.printMatrix();
+    cout<<"row="<<pro1.shape(0)<<endl;
+    cout<<"col="<<pro1.shape(1)<<endl;
 
     // Matrix<float> sub = sum - fmat1;
     // sub.printMatrix();

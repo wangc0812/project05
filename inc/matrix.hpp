@@ -161,7 +161,7 @@ public:
             
     }
 
-    // Print Matrix or Elems
+    // Basic function
     void printMatrix() const
     {
         if(this->_elem != NULL)
@@ -221,6 +221,24 @@ public:
         
         _elem[ this->_column * r + c] = value;
         return true;
+    }
+
+    size_t shape(int flag)
+    {
+        if (flag == 0)
+        {
+            return this -> _row;
+        }
+
+        if(flag == 1)
+        {
+            return this -> _column;
+        }
+        
+        std::cerr<< "flag needed to be 1 or 0"<<std::endl;
+        std::cerr<< "invalid input" <<std::endl;
+        exit(-1);
+        
     }
 
     // Operator overloading
