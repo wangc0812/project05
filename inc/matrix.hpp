@@ -159,7 +159,7 @@ public:
     }
 
     // Deconstructor
-    ~Matrix()
+    virtual ~Matrix()
     {
         this -> _row = 0;
         this -> _column = 0;
