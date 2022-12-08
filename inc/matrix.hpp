@@ -6,7 +6,6 @@
 #include <string.h>
 #include <iomanip>
 
-
 // Class Matrix define
 template <typename T>
 class Matrix
@@ -418,9 +417,5 @@ public:
 
  
 };
-
-
-
-
 
 #endif
