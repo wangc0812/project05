@@ -266,7 +266,7 @@ public:
 
 
     // Operator overloading
-    Matrix<T> operator=(const Matrix<T> & B)
+    Matrix<T>& operator=(const Matrix<T> & B)
     {
         if (B._elem == NULL || this -> _elem == NULL)
         {   
