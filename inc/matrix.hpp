@@ -87,9 +87,8 @@ public:
 
     }
 
-    Matrix(const Matrix<T> & rhs)
+    Matrix(const Matrix<T> &rhs)
     {
-    
         if(rhs._elem == NULL)
         {
          std::cerr << "Matrix(const Matrix<T> & rhs) : rhs data invalid" << std::endl; 
@@ -264,10 +263,14 @@ public:
         return this -> _elem;
     }
 
-
     // Operator overloading
-    Matrix<T>& operator=(const Matrix<T> & B)
+    Matrix<T>& operator=(const Matrix<T> &B)
     {
+        if(this == &B)
+        {
+            return * this;
+        }
+
         if (B._elem == NULL || this -> _elem == NULL)
         {   
             std::cerr << "matrix data invalid" << std::endl;
@@ -295,7 +298,7 @@ public:
         return * this;
     }
 
-    Matrix<T> operator+(const Matrix<T> & B) const
+    Matrix<T> operator+(const Matrix<T> &B) const
     {
         if (B._elem == NULL || this -> _elem == NULL)
         {   
@@ -323,7 +326,7 @@ public:
 
     }
 
-    Matrix<T> operator-(const Matrix<T> & B) const
+    Matrix<T> operator-(const Matrix<T> &B) const
     {
         if (B._elem == NULL || this -> _elem == NULL)
         {   
@@ -369,20 +372,19 @@ public:
         return DOT_PRODUCT;
     }
     
-    Matrix<T> operator*(const Matrix<T> B) const
+    Matrix<T> operator*(const Matrix<T> &B) const
     {   
         Matrix<T> PRO = matmul(*this, B);
         return PRO;
     }
     
-
     // friend function parameter list has order!
-    friend Matrix<T> operator*(const T scalar, const Matrix<T> & Mat)
+    friend Matrix<T> operator*(const T scalar, const Matrix<T> &Mat)
     {
         return Mat * scalar;
     }
 
-    friend Matrix<T> matmul(const Matrix<T> & A, const Matrix<T> & B)
+    friend Matrix<T> matmul(const Matrix<T> &A, const Matrix<T> &B)
     {
         if (A._elem == NULL || B._elem == NULL)
         {

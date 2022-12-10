@@ -14,7 +14,7 @@ int main()
     // fmat1.printMatrix();
     Matrix<float> sum = fmat0 + fmat1;
     // sum.printMatrix();
-    Matrix<float> dot = 10.0f * sum ;
+    // Matrix<float> dot = 10.0f * sum ;
     // dot.printMatrix();
     Matrix<float> pro1 = fmat1 * sum ;
     Matrix<float> pro2 = matmul(fmat1,fmat1);
@@ -22,18 +22,18 @@ int main()
     // pro2.printMatrix();
     // cout<<"row="<<pro1.shape(0)<<endl;
     // cout<<"col="<<pro1.shape(1)<<endl;
-    float * data = pro1.getValue();
+    // float * data = pro1.getValue();
     // int len = pro1.getEleNum();
     // sum = pro1;
     // sum.printMatrix();
-    Matrix<float> fmat2(4,4,data);
+    // Matrix<float> fmat2(4,4,data);
     // fmat2.printMatrix();
-    Matrix<float> fmat3(fmat0);
+    // Matrix<float> fmat3(fmat0);
     // fmat3.printMatrix();
 
-    Matrix<float> ass (4,4);
-    ass = fmat2;
-    ass.printMatrix();
+    // Matrix<float> ass (4,4);
+    // ass = fmat2;
+    // ass.printMatrix();
 
     return 0;
 }
