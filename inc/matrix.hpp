@@ -6,7 +6,7 @@
 #include <string.h>
 #include <iomanip>
 
-// Class Matrix define
+// struct MatrixValue define
 template <typename T>
 struct MatrixValue{
         int *refCount;
@@ -20,6 +20,7 @@ struct MatrixValue{
         ~MatrixValue();
 };
 
+// Class Matrix define
 template <typename T>
 class Matrix
 {    
